@@ -37,8 +37,39 @@ conn.connect((error) => {
         console.log(error);
     } else {
         console.log("Connection Successful");
+
+        // Select Data---------------------------------
+        app.get('/allTask', function (req, res) {
+            let selectQuery = "SELECT * FROM `task`";
+
+            conn.query(selectQuery, (error, result) => {
+                if (error) {
+                    console.log("Data Select Failed");
+                    console.log(error);
+                } else {
+                    res.send(result)
+                }
+            })
+
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-    
+
 });
 
 
