@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 // port
-const PORT = 1010;
+const PORT = 8080;
 
 
 // Cors
