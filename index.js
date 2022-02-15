@@ -39,7 +39,7 @@ conn.connect((error) => {
         console.log("Connection Successful");
 
         // Select Data---------------------------------
-        app.get('/api/get/:date', function (req, res) {
+        app.get('/api/get-home/:date', function (req, res) {
             const taskDate = req.params.date;
             var selectQuery;
             if (taskDate == 'empty') {
