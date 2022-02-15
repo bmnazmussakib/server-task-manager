@@ -39,7 +39,7 @@ conn.connect((error) => {
         console.log("Connection Successful");
 
         // Select Data---------------------------------
-        app.get('/allTask', function (req, res) {
+        app.get('/api/get', function (req, res) {
             let selectQuery = "SELECT * FROM `task`";
 
             conn.query(selectQuery, (error, result) => {
@@ -52,12 +52,25 @@ conn.connect((error) => {
             })
 
         })
+        // app.get('/allTask', function (req, res) {
+        //     let selectQuery = "SELECT * FROM `task`";
+
+        //     conn.query(selectQuery, (error, result) => {
+        //         if (error) {
+        //             console.log("Data Select Failed");
+        //             console.log(error);
+        //         } else {
+        //             res.send(result)
+        //         }
+        //     })
+
+        // })
 
 
 
 
         // Post Data---------------------------------
-        app.post('/postTask', function (req, res) {
+        app.post('/api/post', function (req, res) {
 
             const { title, date, duration, type } = req.body;
 
@@ -77,7 +90,7 @@ conn.connect((error) => {
 
 
         //  Delete Data---------------------------------
-        app.delete('/delete/:id', function (req, res) {
+        app.delete('/api/remove/:id', function (req, res) {
             const taskId = req.params.id;
 
             let deleteQuery = "DELETE FROM task WHERE id =" + taskId;
@@ -95,13 +108,13 @@ conn.connect((error) => {
 
 
         // Read Data by ID----------------------------------------
-        app.get('/allTask/:id', function (req, res) {
+        app.get('/api/get/:id', function (req, res) {
 
             const taskId = req.params.id;
 
-            let selectQuery = "SELECT * FROM `task` WHERE id = " + taskId;
+            let selectQuery = "SELECT * FROM `task` WHERE id =" + taskId;
 
-            conn.query(selectQuery, (error, result) => {
+            conn.query(selectQuery,  (error, result) => {
                 if (error) {
                     console.log("Data Select Failed");
                     console.log(error);
@@ -114,13 +127,18 @@ conn.connect((error) => {
 
 
         // Update Data by ID----------------------------------------
-        app.get('/allTask/:id', function (req, res) {
+        app.put('/api/update/:id', function (req, res) {
 
             const taskId = req.params.id;
 
-            let selectQuery = "SELECT * FROM `task` WHERE id = " + taskId;
+            const { title, date, duration, type } = req.body;
 
-            conn.query(selectQuery, (error, result) => {
+            let updateQuery = "UPDATE task SET title = ?, date = ?, duration = ?, type = ? WHERE id = ?";
+
+            // const values = [title, date, duration, type, taskId];
+
+
+            conn.query(updateQuery, [title, date, duration, type, taskId], (error, result) => {
                 if (error) {
                     console.log("Data Select Failed");
                     console.log(error);
