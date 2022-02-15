@@ -56,6 +56,83 @@ conn.connect((error) => {
 
 
 
+        // Post Data---------------------------------
+        app.post('/postTask', function (req, res) {
+
+            const { title, date, duration, type } = req.body;
+
+            const sql = "INSERT INTO task VALUES ?";
+            const values = [['null', title, date, duration, type]];
+
+            conn.query(sql, [values], (error) => {
+                if (error) {
+                    console.log("Data Insert Failed");
+                    console.log(error);
+                } else {
+                    console.log("Data Insert Successful");
+                }
+            })
+        })
+
+
+
+        //  Delete Data---------------------------------
+        app.delete('/delete/:id', function (req, res) {
+            const taskId = req.params.id;
+
+            let deleteQuery = "DELETE FROM task WHERE id =" + taskId;
+
+            conn.query(deleteQuery, (error) => {
+                if (error) {
+                    console.log("Data Delete Failed");
+                    console.log(error);
+                } else {
+                    console.log("Data Delete Successful");
+                }
+            })
+
+        })
+
+
+        // Read Data by ID----------------------------------------
+        app.get('/allTask/:id', function (req, res) {
+
+            const taskId = req.params.id;
+
+            let selectQuery = "SELECT * FROM `task` WHERE id = " + taskId;
+
+            conn.query(selectQuery, (error, result) => {
+                if (error) {
+                    console.log("Data Select Failed");
+                    console.log(error);
+                } else {
+                    res.send(result)
+                }
+            })
+
+        })
+
+
+        // Update Data by ID----------------------------------------
+        app.get('/allTask/:id', function (req, res) {
+
+            const taskId = req.params.id;
+
+            let selectQuery = "SELECT * FROM `task` WHERE id = " + taskId;
+
+            conn.query(selectQuery, (error, result) => {
+                if (error) {
+                    console.log("Data Select Failed");
+                    console.log(error);
+                } else {
+                    res.send(result)
+                }
+            })
+
+        })
+
+
+
 
 
 
