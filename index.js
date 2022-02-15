@@ -39,9 +39,14 @@ conn.connect((error) => {
         console.log("Connection Successful");
 
         // Select Data---------------------------------
-        app.get('/api/get', function (req, res) {
-            let selectQuery = "SELECT * FROM `task`";
-
+        app.get('/api/get/:date', function (req, res) {
+            const taskDate = req.params.date;
+            var selectQuery;
+            if (taskDate == 'empty') {
+                  selectQuery = "SELECT * FROM `task`"; 
+            } else {
+                  selectQuery = "SELECT * FROM `task` WHERE date=" + taskDate; 
+            }
             conn.query(selectQuery, (error, result) => {
                 if (error) {
                     console.log("Data Select Failed");
@@ -50,7 +55,8 @@ conn.connect((error) => {
                     res.send(result)
                 }
             })
-
+            // ''
+            // res.send(taskDate)
         })
         // app.get('/allTask', function (req, res) {
         //     let selectQuery = "SELECT * FROM `task`";
@@ -148,17 +154,6 @@ conn.connect((error) => {
             })
 
         })
-
-
-
-
-
-
-
-
-
-
-
 
 
 
