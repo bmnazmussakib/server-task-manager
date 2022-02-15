@@ -55,22 +55,9 @@ conn.connect((error) => {
                     res.send(result)
                 }
             })
-            // ''
-            // res.send(taskDate)
+            
         })
-        // app.get('/allTask', function (req, res) {
-        //     let selectQuery = "SELECT * FROM `task`";
 
-        //     conn.query(selectQuery, (error, result) => {
-        //         if (error) {
-        //             console.log("Data Select Failed");
-        //             console.log(error);
-        //         } else {
-        //             res.send(result)
-        //         }
-        //     })
-
-        // })
 
 
 
